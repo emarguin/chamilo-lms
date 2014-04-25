@@ -859,6 +859,7 @@ switch ($action) {
             $_SESSION['oLP']->set_modified_on();
             $_SESSION['oLP']->set_publicated_on($publicated_on);
             $_SESSION['oLP']->set_expired_on($expired_on);
+			$_SESSION['oLP']->set_desc($_POST['description']);
 
             if (isset($_REQUEST['remove_picture']) && $_REQUEST['remove_picture']) {
                 $_SESSION['oLP']->delete_lp_image();

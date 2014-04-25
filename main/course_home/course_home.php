@@ -159,6 +159,12 @@ if (isset($_GET['action']) && $_GET['action'] == 'subscribe') {
 /*	Is the user allowed here? */
 api_protect_course_script(true);
 
+// TODO use a config variable
+if(!api_is_allowed_to_edit(true,true,true))
+{
+	header('Location: '.api_get_path(WEB_CODE_PATH).'course_home/simple_learning.php?'.api_get_cidreq());exit;
+}
+
 /*  STATISTICS */
 
 if (!isset($coursesAlreadyVisited[$course_code])) {

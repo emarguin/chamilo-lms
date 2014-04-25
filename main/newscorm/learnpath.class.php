@@ -137,6 +137,7 @@ class learnpath
                 $row                    = Database::fetch_array($res);
                 $this->type             = $row['lp_type'];
                 $this->name             = stripslashes($row['name']);
+				$this->description      = $row['description'];
                 //$this->encoding       = $row['default_encoding']; // Chamilo 1.8.8: We intend not to use 'default_encoding' field anymore.
                 $this->proximity        = $row['content_local'];
                 $this->theme            = $row['theme'];
@@ -4391,6 +4392,27 @@ class learnpath
         $sql = "UPDATE $lp_table SET author = '" . $this->author . "' WHERE c_id = ".$course_id." AND id = '$lp_id'";
         if ($this->debug > 2) {
             error_log('New LP - lp updated with new preview author : ' . $this->author, 0);
+        }
+        Database::query($sql);
+        return true;
+	}
+	
+	/**
+     * Sets the desc of a LP (and save)
+     * @param	string	Optional string giving the new desc of this learnpath
+     * @return   bool    Returns true if desc's name is not empty
+     */
+    public function set_desc($name = '') {
+        $course_id = api_get_course_int_id();
+        if ($this->debug > 0) {
+            error_log('New LP - In learnpath::set_desc()', 0);
+        }
+        $this->description = Database::escape_string($name);
+        $lp_table = Database :: get_course_table(TABLE_LP_MAIN);
+        $lp_id = $this->get_id();
+        $sql = "UPDATE $lp_table SET description = '" . $this->description . "' WHERE c_id = ".$course_id." AND id = '$lp_id'";echo $sql;
+        if ($this->debug > 2) {
+            error_log('New LP - lp updated with new preview author : ' . $this->lp_desc, 0);
         }
         Database::query($sql);
         return true;

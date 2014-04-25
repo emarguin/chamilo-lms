@@ -67,6 +67,7 @@ $form->addElement('header', get_lang('EditLPSettings'));
 $form->addElement('text', 'lp_name', api_ucfirst(get_lang('LearnpathTitle')), array('size' => 43));
 $form->applyFilter('lp_name', 'html_filter');
 $form->addRule('lp_name', get_lang('ThisFieldIsRequired'), 'required');
+$form->addElement('textarea', 'description', get_lang('Description'), array('style="width:300px; height:200px;"'));
 
 // Metadata
 //$clean_scorm_id=Security::remove_XSS($_GET['lp_id']);
@@ -160,6 +161,7 @@ if (api_get_setting('search_enabled') === 'true') {
 $defaults['lp_encoding']    = Security::remove_XSS($_SESSION['oLP']->encoding);
 $defaults['lp_name']        = Security::remove_XSS($_SESSION['oLP']->get_name());
 $defaults['lp_author']      = Security::remove_XSS($_SESSION['oLP']->get_author());
+$defaults['description']		= Security::remove_XSS($_SESSION['oLP']->description);
 $defaults['hide_toc_frame'] = Security::remove_XSS($_SESSION['oLP']->get_hide_toc_frame());
 
 $expired_on     = $_SESSION['oLP'] ->expired_on;
